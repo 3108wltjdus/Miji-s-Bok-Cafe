@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>미지의 '복' 카페</title>
+
+<style>
+  body {
+    font-family: "Pretendard", Arial, sans-serif;
+    background: linear-gradient(to bottom, #0b2a4a, #1f4f2e);
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+  }
+
+  .logo {
+    width: 180px;
+    margin: 0 auto 10px;
+  }
+
+  h1 {
+    margin: 10px 0 30px;
+    font-size: 28px;
+  }
+
+  .tabs {
+    margin-bottom: 25px;
+  }
+
+  .tabs button {
+    padding: 12px 26px;
+    margin: 0 6px;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .tabs button.active {
+    background: #ffd166;
+    color: #222;
+  }
+
+  .menu {
+    display: none;
+    margin-top: 20px;
+  }
+
+  .menu button {
+    display: block;
+    margin: 10px auto;
+    width: 280px;
+    padding: 12px;
+    border-radius: 15px;
+    border: none;
+    background: #ffffff;
+    color: #222;
+    cursor: pointer;
+    font-size: 15px;
+  }
+
+  .ingredients {
+    margin-top: 25px;
+    background: rgba(255,255,255,0.15);
+    padding: 15px;
+    border-radius: 15px;
+  }
+</style>
+</head>
+
+<body>
+
+  <!-- 로고 -->
+  <img src="미지의.png" alt="미지의 복 카페 로고" class="logo">
+
+  <h1>미지의 ‘복’ 카페</h1>
+
+  <!-- 탭 -->
+  <div class="tabs">
+    <button id="drinkTab" class="active" onclick="showMenu('drink')">☕ 음료</button>
+    <button id="dessertTab" onclick="showMenu('dessert')">🍪 디저트</button>
+  </div>
+
+  <!-- 음료 -->
+  <div id="drinkMenu" class="menu">
+    <button onclick="showIngredients('멜론소다pop', '사이다 + 멜론시럽')">멜론소다pop</button>
+    <button onclick="showIngredients('복숭아 아이스티 ZERO', '제로슈가 복숭아 아이스티 가루 + 물')">복숭아 아이스티 ZERO</button>
+    <button onclick="showIngredients('럭키 젤리소다', '사이다 + 젤리')">럭키 젤리소다</button>
+    <button onclick="showIngredients('초코 크럼블 프라페', '초코라떼 분말 + 우유 + 휘핑크림')">초코 크럼블 프라페</button>
+    <button onclick="showIngredients('꿈나라 시나몬 우유', '우유 + 휘핑크림 + 시나몬가루')">꿈나라 시나몬 우유</button>
+  </div>
+
+  <!-- 디저트 -->
+  <div id="dessertMenu" class="menu">
+    <button onclick="showIngredients(`미지 특제 '복' 쿠키`, '초코 비스킷 + 바닐라 크림 + 토핑 추가')">
+      미지 특제 '복' 쿠키
+    </button>
+    <button onclick="showIngredients('커스텀 피자', '원하는 토핑 선택')">
+      커스텀 피자
+    </button>
+  </div>
+
+  <!-- 재료 -->
+  <div id="ingredients" class="ingredients"></div>
+
+<script>
+  function showMenu(type) {
+    document.getElementById("drinkMenu").style.display = "none";
+    document.getElementById("dessertMenu").style.display = "none";
+    document.getElementById("ingredients").innerHTML = "";
+
+    document.getElementById("drinkTab").classList.remove("active");
+    document.getElementById("dessertTab").classList.remove("active");
+
+    if (type === "drink") {
+      document.getElementById("drinkMenu").style.display = "block";
+      document.getElementById("drinkTab").classList.add("active");
+    } else {
+      document.getElementById("dessertMenu").style.display = "block";
+      document.getElementById("dessertTab").classList.add("active");
+    }
+  }
+
+  function showIngredients(name, text) {
+    document.getElementById("ingredients").innerHTML =
+      `<strong>${name}</strong><br>재료: ${text}`;
+  }
+
+  showMenu("drink");
+</script>
+
+</body>
+</html>
