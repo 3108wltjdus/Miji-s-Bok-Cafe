@@ -1,0 +1,63 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+            - 이름: 캐시
+  사용: actions/cache@v5.0.1
+  와 함께:
+    # 캐시 및 복원할 파일, 디렉터리 및 와일드카드 패턴 목록
+    길:
+    # 캐시를 복원하고 저장하기 위한 명시적 키
+    열쇠:
+    # 접두사와 일치하는 키를 나열하는 정렬된 여러 줄 문자열입니다. 이 키는 해당 키에 대한 캐시 적중이 발생하지 않은 경우 오래된 캐시를 복원하는 데 사용됩니다. 참고: 이 경우 `cache-hit`은 false를 반환합니다.
+    restore-keys: # 선택 사항
+    # 대용량 파일을 업로드할 때 파일을 분할하는 데 사용되는 청크 크기(바이트)
+    업로드 청크 크기: # 선택 사항
+    # 선택 사항인 부울 값으로, 활성화될 경우 윈도우 실행기가 캐시를 저장하거나 복원할 수 있으며, 이렇게 저장된 캐시는 다른 플랫폼에서도 각각 복원 또는 저장될 수 있습니다.
+    enableCrossOsArchive: # 선택 사항, 기본값은 false
+    # 캐시 항목을 찾을 수 없는 경우 워크플로를 실패 처리합니다.
+    캐시 누락 시 실패: # 선택 사항, 기본값은 false입니다.
+    # 캐시를 다운로드하지 않고 주어진 입력(키, 복원 키)에 대한 캐시 항목이 존재하는지 확인합니다.
+    조회 전용: # 선택 사항, 기본값은 false입니다.
+    # 이전 단계가 실패하더라도 캐시를 저장하기 위해 후처리 단계를 실행합니다.
+    save-always: # 선택 사항, 기본값은 false입니다.
+          
